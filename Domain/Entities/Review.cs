@@ -7,9 +7,9 @@ public class Review
     public User User { get; set; } = default!;
     public Guid GameId { get; set; }
     public Game Game { get; set; } = default!;
-    public Comment? Comment { get; set; }
+    public Comment? MainComment { get; set; }
     public float Rating { get; set; }
     public int Likes { get; set; }
-    public List<Comment>? Comments { get; set; }
+    public ICollection<Comment>? Comments { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

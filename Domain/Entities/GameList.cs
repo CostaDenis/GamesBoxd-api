@@ -8,5 +8,5 @@ public class GameList
     public Guid UserId { get; set; }
     public User User { get; set; } = default!;
     public int Likes { get; set; }
-    public List<Comment> Comments { get; set; } = new();
+    public ICollection<Comment>? Comments { get; set; }
 }

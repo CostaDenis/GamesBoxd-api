@@ -11,10 +11,10 @@ public class Game
     public Developer Developer { get; set; } = default!;
     public Publisher Publisher { get; set; } = default!;
     public DateTime ReleaseDate { get; set; }
-    public List<EGenre> Genres { get; set; } = new();
-    public List<EPlatform> Platforms { get; set; } = new();
+    public ICollection<EGenre> Genres { get; set; } = new HashSet<EGenre>();
+    public ICollection<EPlatform> Platforms { get; set; } = new HashSet<EPlatform>();
     public float AverageRating { get; set; }
-    public List<UserGame> UserGames { get; set; } = new();
-    public List<Review> Reviews { get; set; } = new();
+    public ICollection<UserGame> UserGames { get; set; } = new HashSet<UserGame>();
+    public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
 }

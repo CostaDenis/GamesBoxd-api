@@ -8,8 +8,9 @@ public class User
     public string UserName { get; set; } = string.Empty;
     public string? Image { get; set; } = string.Empty;
     public string? Bio { get; set; }
-    public List<Review>? Reviews { get; set; } = new();
-    public List<UserFriend> Friends { get; set; } = new();
-    public List<UserGame> UserGames { get; set; } = new();
-    public List<GameList> Lists { get; set; } = new();
+    public ICollection<Review>? Reviews { get; set; }
+    public ICollection<UserFollow> Followers { get; set; } = new HashSet<UserFollow>();
+    public ICollection<UserFollow> Following { get; set; } = new HashSet<UserFollow>();
+    public ICollection<UserGame> UserGames { get; set; } = new HashSet<UserGame>();
+    public ICollection<GameList> Lists { get; set; } = new HashSet<GameList>();
 }
