@@ -2,9 +2,9 @@ namespace GamesBoxd_api.Domain.Entities;
 
 public class Review
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public Guid UserId { get; set; }
-    public UserProfile User { get; set; } = default!;
+    public User User { get; set; } = default!;
     public Guid GameId { get; set; }
     public Game Game { get; set; } = default!;
     public Comment? Comment { get; set; }

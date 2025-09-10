@@ -4,7 +4,7 @@ namespace GamesBoxd_api.Domain.Entities;
 
 public class Game
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
     public string Bio { get; set; } = string.Empty;
