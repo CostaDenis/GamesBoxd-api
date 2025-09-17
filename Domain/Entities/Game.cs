@@ -1,5 +1,3 @@
-using GamesBoxd_api.Domain.Enums;
-
 namespace GamesBoxd_api.Domain.Entities;
 
 public class Game
@@ -8,13 +6,15 @@ public class Game
     public string Name { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
     public string Bio { get; set; } = string.Empty;
-    public Developer Developer { get; set; } = default!;
-    public Publisher Publisher { get; set; } = default!;
+    public Guid DeveloperId { get; set; }
+    public Developer Developer { get; set; } = new();
+    public Guid PublisherId { get; set; }
+    public Publisher Publisher { get; set; } = new();
     public DateTime ReleaseDate { get; set; }
-    public ICollection<EGenre> Genres { get; set; } = new HashSet<EGenre>();
-    public ICollection<EPlatform> Platforms { get; set; } = new HashSet<EPlatform>();
+    public List<Genre> Genres { get; set; } = new();
+    public List<Platform> Platforms { get; set; } = new();
     public float AverageRating { get; set; }
-    public ICollection<UserGame> UserGames { get; set; } = new HashSet<UserGame>();
-    public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+    public List<UserGame> UserGames { get; set; } = new();
+    public List<Review> Reviews { get; set; } = new();
 
 }

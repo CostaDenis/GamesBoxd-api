@@ -1,6 +1,6 @@
 namespace GamesBoxd_api.Domain.Entities;
 
-public class Developer
+public class Genre
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty;
