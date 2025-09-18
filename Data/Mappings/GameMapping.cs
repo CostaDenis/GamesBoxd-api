@@ -34,24 +34,6 @@ public class GameMapping : IEntityTypeConfiguration<Game>
             .HasMaxLength(1024)
             .IsRequired(true);
 
-        // builder.OwnsOne(g => g.Developer, developer =>
-        // {
-        //     developer.Property(d => d.Id)
-        //     .HasColumnName("id")
-        //     .HasColumnType("uuid")
-        //     .IsRequired(true);
-
-        //     developer.Property(d => d.Name)
-        //     .HasColumnName("name")
-        //     .HasColumnType("varchar")
-        //     .HasMaxLength(80)
-        //     .IsRequired(true);
-
-        //     developer.HasIndex(d => d.Name)
-        //     .IsUnique()
-        //     .HasDatabaseName("idx_games_developer_name");
-        // });
-
         builder.Property(g => g.DeveloperId)
             .HasColumnName("developer_id")
             .HasColumnType("uuid")
@@ -73,24 +55,6 @@ public class GameMapping : IEntityTypeConfiguration<Game>
             .HasForeignKey(g => g.PublisherId)
             .HasConstraintName("fk_games_publisher_id")
             .OnDelete(DeleteBehavior.Restrict);
-
-        // builder.OwnsOne(g => g.Publisher, publisher =>
-        // {
-        //     publisher.Property(p => p.Id)
-        //     .HasColumnName("id")
-        //     .HasColumnType("uuid")
-        //     .IsRequired(true);
-
-        //     publisher.Property(p => p.Name)
-        //     .HasColumnName("name")
-        //     .HasColumnType("varchar")
-        //     .HasMaxLength(80)
-        //     .IsRequired(true);
-
-        //     publisher.HasIndex(d => d.Name)
-        //     .IsUnique()
-        //     .HasDatabaseName("idx_games_publisher_name");
-        // });
 
         builder.Property(g => g.ReleaseDate)
             .HasColumnName("release_date")
