@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.Marshalling;
 using GamesBoxd_api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +14,8 @@ public class AppDbContext : DbContext
     public DbSet<Developer> Developers { get; set; }
     public DbSet<Game> Games { get; set; }
     public DbSet<GameList> GameLists { get; set; }
+    public DbSet<Genre> Genres { get; set; }
+    public DbSet<Platform> Platforms { get; set; }
     public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<User> Users { get; set; }
@@ -23,20 +24,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserFollow>()
-            .HasIndex(uf => new { uf.FollowerId, uf.FolloweeId })
-            .IsUnique();
-
-        modelBuilder.Entity<UserFollow>()
-            .HasOne(uf => uf.Follower)
-            .WithMany(u => u.Following)
-            .HasForeignKey(uf => uf.FollowerId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        modelBuilder.Entity<UserFollow>()
-            .HasOne(uf => uf.Followee)
-            .WithMany(u => u.Followers)
-            .HasForeignKey(uf => uf.FolloweeId)
-            .OnDelete(DeleteBehavior.Restrict);
+        //Aplica configurações dos mappings
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(Program).Assembly);
     }
 }

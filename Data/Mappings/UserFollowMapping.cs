@@ -12,6 +12,9 @@ public class UserFollowMapping : IEntityTypeConfiguration<UserFollow>
 
         builder.HasKey(u => new { u.FollowerId, u.FolloweeId });
 
+        builder.HasIndex(u => new { u.FollowerId, u.FolloweeId })
+            .IsUnique();
+
         builder.HasOne(u => u.Follower)
             .WithMany(user => user.Following)
             .HasForeignKey(u => u.FollowerId)

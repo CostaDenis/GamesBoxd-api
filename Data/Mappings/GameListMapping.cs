@@ -74,12 +74,6 @@ public class GameListMapping : IEntityTypeConfiguration<GameList>
             .IsRequired();
 
         builder.HasMany(g => g.Comments)
-            .WithOne()
-            .HasForeignKey("gamelist_id")
-            .HasConstraintName("fk_comments_gamelist_id")
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasMany(g => g.Comments)
             .WithOne(c => c.GameList)
             .HasForeignKey(c => c.GameListId)
             .HasConstraintName("fk_comments_gamelist_id")

@@ -27,6 +27,12 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .IsUnique()
             .HasDatabaseName("ux_users_email");
 
+        builder.Property(u => u.PasswordHash)
+            .HasColumnName("password_hash")
+            .HasColumnType("varchar")
+            .HasMaxLength(256)
+            .IsRequired(true);
+
         builder.Property(u => u.UserName)
             .HasColumnName("username")
             .HasColumnType("varchar")

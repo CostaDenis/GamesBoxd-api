@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 var key = builder.Configuration["Jwt"];
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -27,6 +26,9 @@ builder.Services.AddAuthentication(option =>
     };
 });
 builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
