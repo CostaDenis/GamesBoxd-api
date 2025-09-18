@@ -153,12 +153,18 @@ public class GameMapping : IEntityTypeConfiguration<Game>
 
         builder.Property(g => g.AverageRating)
             .HasColumnName("average_rating")
-            .HasColumnType("numeric(3,2)");
+            .HasColumnType("numeric(1,2)");
 
         builder.HasMany(g => g.UserGames)
             .WithOne(ug => ug.Game)
             .HasForeignKey(ug => ug.GameId)
             .HasConstraintName("fk_user_games_game_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(g => g.Reviews)
+            .WithOne(r => r.Game)
+            .HasForeignKey(r => r.GameId)
+            .HasConstraintName("fk_review_game_id")
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -14,6 +14,7 @@ public class Game
     public List<Genre> Genres { get; set; } = new();
     public List<Platform> Platforms { get; set; } = new();
     public float AverageRating { get; set; }
+    public List<GameList> Lists { get; set; } = new();
     public List<UserGame> UserGames { get; set; } = new();
     public List<Review> Reviews { get; set; } = new();
 
