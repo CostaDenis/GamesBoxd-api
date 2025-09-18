@@ -15,13 +15,17 @@ public class UserGameMapping : IEntityTypeConfiguration<UserGame>
         builder.HasOne(ug => ug.User)
             .WithMany(u => u.UserGames)
             .HasForeignKey(ug => ug.UserId)
-            .HasConstraintName("fk_user_games_user_id")
+            .HasConstraintName("fk_usergames_user_id")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(ug => ug.Game)
             .WithMany(g => g.UserGames)
             .HasForeignKey(ug => ug.GameId)
-            .HasConstraintName("fk_user_games_game_id")
+            .HasConstraintName("fk_usergames_game_id")
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(ug => ug.UserId);
+
+        builder.HasIndex(ug => ug.GameId);
     }
 }

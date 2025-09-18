@@ -10,6 +10,8 @@ public class PublisherMapping : IEntityTypeConfiguration<Publisher>
     {
         builder.ToTable("publisher");
 
+        builder.HasKey(p => p.Id);
+
         builder.Property(p => p.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")

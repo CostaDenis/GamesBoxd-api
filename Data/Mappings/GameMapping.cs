@@ -11,6 +11,8 @@ public class GameMapping : IEntityTypeConfiguration<Game>
     {
         builder.ToTable("games");
 
+        builder.HasKey(g => g.Id);
+
         builder.Property(g => g.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")
@@ -82,8 +84,12 @@ public class GameMapping : IEntityTypeConfiguration<Game>
                 gg =>
                 {
                     gg.ToTable("game_genre");
-                    gg.HasKey("game_id", "genre_id");
+
+                    gg.HasKey("game_id", "genre_id")
+                        .HasName("pk_game_genre");
+
                     gg.HasIndex("game_id");
+
                     gg.HasIndex("genre_id");
                 }
             );
@@ -117,7 +123,7 @@ public class GameMapping : IEntityTypeConfiguration<Game>
 
         builder.Property(g => g.AverageRating)
             .HasColumnName("average_rating")
-            .HasColumnType("numeric(1,2)");
+            .HasColumnType("numeric(3,2)");
 
         builder.HasMany(g => g.UserGames)
             .WithOne(ug => ug.Game)

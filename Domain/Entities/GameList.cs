@@ -6,8 +6,8 @@ public class GameList
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public Guid UserId { get; set; }
-    public User User { get; set; } = new();
-    public List<Game> Games { get; set; } = new();
+    public User User { get; set; } = default!;
+    public List<Game> Games { get; set; } = default!;
     public int Likes { get; set; }
     public List<Comment>? Comments { get; set; }
 }

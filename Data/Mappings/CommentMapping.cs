@@ -9,6 +9,8 @@ public class CommentMapping : IEntityTypeConfiguration<Comment>
     {
         builder.ToTable("comments");
 
+        builder.HasKey(c => c.Id);
+
         builder.Property(c => c.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")
@@ -35,6 +37,7 @@ public class CommentMapping : IEntityTypeConfiguration<Comment>
         builder.Property(c => c.Likes)
             .HasColumnName("likes")
             .HasColumnType("integer")
+            .HasDefaultValue(0)
             .IsRequired(true);
 
         builder.Property(c => c.CreatedAt)

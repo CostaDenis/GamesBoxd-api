@@ -10,6 +10,8 @@ public class ReviewMapping : IEntityTypeConfiguration<Review>
     {
         builder.ToTable("reviews");
 
+        builder.HasKey(r => r.Id);
+
         builder.Property(r => r.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")
@@ -31,29 +33,28 @@ public class ReviewMapping : IEntityTypeConfiguration<Review>
             .WithMany()
             .HasForeignKey(r => r.MainCommentId)
             .HasConstraintName("fk_reviews_main_comment_id")
-            .OnDelete(DeleteBehavior.SetNull)
-            .IsRequired(false);
+            .OnDelete(DeleteBehavior.SetNull);
 
         builder.Property(r => r.Rating)
             .HasColumnName("rating")
-            .HasColumnType("numeric(2,1)")
+            .HasColumnType("numeric(3,2)")
             .IsRequired();
 
         builder.Property(r => r.Likes)
             .HasColumnName("likes")
             .HasColumnType("integer")
+            .HasDefaultValue(0)
             .IsRequired(true);
 
         builder.HasMany(r => r.Comments)
             .WithOne(c => c.Review)
             .HasForeignKey(c => c.ReviewId)
             .HasConstraintName("fk_comment_review_id")
-            .OnDelete(DeleteBehavior.Cascade)
-            .IsRequired(false);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(r => r.CreatedAt)
             .HasColumnName("created_at")
             .HasColumnType("timestamptz")
-            .IsRequired();
+            .IsRequired(true);
     }
 }

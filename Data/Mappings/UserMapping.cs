@@ -15,6 +15,8 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .HasColumnType("uuid")
             .IsRequired(true);
 
+        builder.HasKey(u => u.Id);
+
         builder.Property(u => u.Email)
             .HasColumnName("email")
             .HasColumnType("varchar")
@@ -51,8 +53,7 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .WithOne(r => r.User)
             .HasForeignKey(r => r.UserId)
             .HasConstraintName("fk_reviews_user_id")
-            .OnDelete(DeleteBehavior.Cascade)
-            .IsRequired(true);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(u => u.Followers)
             .WithOne(uf => uf.Followee)
@@ -64,6 +65,18 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .WithOne(uf => uf.Follower)
             .HasForeignKey(u => u.FollowerId)
             .HasConstraintName("fk_userfollows_follower_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(u => u.UserGames)
+            .WithOne(ug => ug.User)
+            .HasForeignKey(ug => ug.UserId)
+            .HasConstraintName("fk_usergames_user_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(u => u.Lists)
+            .WithOne(gl => gl.User)
+            .HasForeignKey(gl => gl.UserId)
+            .HasConstraintName("fk_gamelist_user_id")
             .OnDelete(DeleteBehavior.Cascade);
 
     }

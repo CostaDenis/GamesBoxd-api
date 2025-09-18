@@ -10,6 +10,8 @@ public class DeveloperMapping : IEntityTypeConfiguration<Developer>
     {
         builder.ToTable("developer");
 
+        builder.HasKey(d => d.Id);
+
         builder.Property(d => d.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")

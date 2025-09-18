@@ -9,6 +9,8 @@ public class GenreMapping : IEntityTypeConfiguration<Genre>
     {
         builder.ToTable("genre");
 
+        builder.HasKey(g => g.Id);
+
         builder.Property(g => g.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")
@@ -19,5 +21,9 @@ public class GenreMapping : IEntityTypeConfiguration<Genre>
             .HasColumnType("varchar")
             .HasMaxLength(30)
             .IsRequired(true);
+
+        builder.HasIndex(g => g.Name)
+            .IsUnique()
+            .HasDatabaseName("idx_genre_name");
     }
 }

@@ -10,6 +10,8 @@ public class GameListMapping : IEntityTypeConfiguration<GameList>
     {
         builder.ToTable("game_list");
 
+        builder.HasKey(g => g.Id);
+
         builder.Property(g => g.Id)
             .HasColumnName("id")
             .HasColumnType("uuid")
@@ -33,6 +35,7 @@ public class GameListMapping : IEntityTypeConfiguration<GameList>
             .HasConstraintName("fk_gamelist_user_id")
             .OnDelete(DeleteBehavior.Cascade);
 
+        //Relacionamento de GameList(n) : (n)Game
         builder.HasMany(gl => gl.Games)
             .WithMany(g => g.Lists)
             .UsingEntity<Dictionary<string, object>>(
@@ -51,18 +54,34 @@ public class GameListMapping : IEntityTypeConfiguration<GameList>
                         .HasConstraintName("fk_gamelist_game_gamelist_id"),
 
                 glg =>
-                    glg.ToTable("gamelist_game")
+                {
+                    glg.ToTable("gamelist_game");
+
+                    glg.HasKey("gamelist_id", "game_id")
+                        .HasName("pk_gamelist_game");
+
+                    glg.HasIndex("gamelist_id");
+
+                    glg.HasIndex("game_id");
+                }
 
             );
 
         builder.Property(g => g.Likes)
             .HasColumnName("likes")
             .HasColumnType("integer")
+            .HasDefaultValue(0)
             .IsRequired();
 
         builder.HasMany(g => g.Comments)
             .WithOne()
             .HasForeignKey("gamelist_id")
+            .HasConstraintName("fk_comments_gamelist_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(g => g.Comments)
+            .WithOne(c => c.GameList)
+            .HasForeignKey(c => c.GameListId)
             .HasConstraintName("fk_comments_gamelist_id")
             .OnDelete(DeleteBehavior.Cascade);
     }

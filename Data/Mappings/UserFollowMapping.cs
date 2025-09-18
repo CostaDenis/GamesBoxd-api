@@ -21,7 +21,7 @@ public class UserFollowMapping : IEntityTypeConfiguration<UserFollow>
         builder.HasOne(u => u.Followee)
             .WithMany(user => user.Followers)
             .HasForeignKey(u => u.FolloweeId)
-            .HasConstraintName("fk_userfollows_folowee_id")
+            .HasConstraintName("fk_userfollows_followee_id")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(u => u.IsBlocked)
