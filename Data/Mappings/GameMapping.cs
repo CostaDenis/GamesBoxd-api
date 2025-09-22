@@ -136,5 +136,11 @@ public class GameMapping : IEntityTypeConfiguration<Game>
             .HasForeignKey(r => r.GameId)
             .HasConstraintName("fk_review_game_id")
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(g => g.BacklogGames)
+            .WithOne(bg => bg.Game)
+            .HasForeignKey(bg => bg.GameId)
+            .HasConstraintName("fk_backloggame_game_id")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

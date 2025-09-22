@@ -17,5 +17,6 @@ public class Game
     public List<GameList> Lists { get; set; } = default!;
     public List<UserGame> UserGames { get; set; } = default!;
     public List<Review> Reviews { get; set; } = default!;
+    public List<BacklogGame> BacklogGames { get; set; } = default!;
 
 }

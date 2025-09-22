@@ -13,4 +13,5 @@ public class User
     public List<UserFollow> Following { get; set; } = default!;
     public List<UserGame> UserGames { get; set; } = default!;
     public List<GameList> Lists { get; set; } = default!;
+    public Backlog? Backlog { get; set; }
 }
